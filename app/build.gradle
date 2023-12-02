@@ -1,0 +1,75 @@
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id("com.google.devtools.ksp").version("1.6.10-1.0.4") // Or latest version of KSP
+}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.example.moshidemo"
+        minSdkVersion 24
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+        exclude 'META-INF/metadata.kotlin_module'
+        exclude 'META-INF/metadata.jvm.kotlin_module'
+    }
+}
+
+android {
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "com.squareup.moshi:moshi:1.9.3"
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
+    //kapt "com.squareup.moshi:moshi-kotlin-codegen:1.9.3"
+    implementation "com.squareup.moshi:moshi-adapters:1.9.3"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation "com.google.code.gson:gson:2.9.0"
+
+    api "io.reactivex.rxjava2:rxjava:2.2.19"
+    api "io.reactivex.rxjava2:rxandroid:2.1.1"
+    api "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    implementation 'com.NBXXF.gson_plugin:lib_gson_annotation:1.2.0-SNAPSHOT'
+    kapt "com.NBXXF.gson_plugin:lib_gson_plugin_kapt:1.2.0-SNAPSHOT"
+
+}
+
+kapt {
+    arguments {
+        arg("factory", "com.xxf.json.gson.plugin.AutoTypeAdapterFactory")
+    }
+}
