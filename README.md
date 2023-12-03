@@ -98,18 +98,7 @@ val gson = GsonBuilder()
         .create()
 ```
 
-## Why
-### Benchmark
-
-* OS: Android 10
-* CPU: Snapdragon 855
-* Core: 4
-
-经过预热的场景下，可以看到耗时从毫秒级降低到了微秒级(横坐标为实验次数，纵坐标为耗时，单位微秒(us)):
-
-![](img/time_cost_compare.svg)
-
-可以从火焰图中看到反射部分（ReflectiveTypeAdapterFactory.create）被优化掉，耗时大幅缩短。
+## 平均三倍以上的提速 比moshi 自动生成adapter 更快
 
 ![](img/compare.png)
 
