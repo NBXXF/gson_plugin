@@ -1,12 +1,13 @@
 # gson_plugin
 gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotlin特性的**、**高性能TypeAdapter**，以提升Gson的序列化与反序列化时间性能。同时也解决了kotlin默认值的问题
 1. 目前测试支持kotlin 最高版本1.7.20
-2. 支持gson和Moshi生成的adapter冲突 
+2. 支持gson和Moshi生成的adapter冲突
 3. 支持gson自定义基本类型解析被阻断无效的场景(比如自定义BoolTypeAdapter)
 4. 支持嵌套内部类
 5. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
 6. 支持别名  @SerializedName("age", alternate = ["age_int","AGE"])
-7. 
+7. 支持模型实现其他接口,比如Serializable等
+
 ## 仓库权限
 ```groovy
 //请在build.gradle中配置
