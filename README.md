@@ -49,7 +49,7 @@ plugins {
 
 dependencies {
     implementation("com.NBXXF.gson_plugin:lib_gson_annotation:1.2.0-SNAPSHOT")
-    kapt("com.NBXXF.gson_plugin:lib_gson_plugin:$last_version")
+    kapt("com.NBXXF.gson_plugin:lib_gson_plugin:1.2.0-SNAPSHOT")
 }
 
 kapt {
@@ -71,7 +71,7 @@ plugins {
 
 dependencies {
     implementation("com.NBXXF.gson_plugin:lib_gson_annotation:1.2.0-SNAPSHOT")
-    kapt("com.NBXXF.gson_plugin:lib_gson_plugin:$last_version")
+    kapt("com.NBXXF.gson_plugin:lib_gson_plugin:1.2.0-SNAPSHOT")
 }
 
 kapt {
@@ -141,7 +141,7 @@ android {
 
 dependencies {
     implementation('com.NBXXF.gson_plugin:lib_gson_annotation:1.2.0-SNAPSHOT')
-    ksp('com.NBXXF.gson_plugin:lib_gson_plugin_kapt:$last_version')
+    ksp('com.NBXXF.gson_plugin:lib_gson_plugin_kapt:1.2.0-SNAPSHOT')
 }
 
 ksp {
@@ -189,7 +189,7 @@ android {
 
 dependencies {
     implementation('com.NBXXF.gson_plugin:lib_gson_annotation:1.2.0-SNAPSHOT')
-    ksp('com.NBXXF.gson_plugin:lib_gson_plugin_ksp:$last_version')
+    ksp('com.NBXXF.gson_plugin:lib_gson_plugin_ksp:1.2.0-SNAPSHOT')
 }
 
 ksp {
