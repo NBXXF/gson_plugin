@@ -1,11 +1,13 @@
 package com.example.moshidemo
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.moshidemo.gson.MainActivity
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.squareup.moshi.JsonAdapter
@@ -23,60 +25,62 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        startActivity(Intent(this,MainActivity::class.java))
     }
 
     val gson = GsonBuilder().create()
     val moshi = Moshi.Builder()
         .build()
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    override fun onResume() {
-        super.onResume()
-
-        val moshiBuilder = Moshi.Builder().add(MyEnumAdapter())
-        val moshi = moshiBuilder.build()
-
-        val clientBuilder = OkHttpClient.Builder().apply {
-            addInterceptor(MyFakeInterceptor())
-        }
-        val client = clientBuilder.build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(client)
-            .build()
-
-//        val service: ApiService = retrofit.create<ApiService>(ApiService::class.java)
-//        service.getInfoObjects()
-//            .subscribeOn(Schedulers.io())
-//            .subscribe({ infoObjects ->
-//                Log.d("OBJECTS", infoObjects.toString())
-//            }, { error ->
-//                Log.e("APIERROR", error.localizedMessage)
-//            })
-
+//    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+//    override fun onResume() {
+//        super.onResume()
+//
+//        val moshiBuilder = Moshi.Builder().add(MyEnumAdapter())
+//        val moshi = moshiBuilder.build()
+//
+//        val clientBuilder = OkHttpClient.Builder().apply {
+//            addInterceptor(MyFakeInterceptor())
+//        }
+//        val client = clientBuilder.build()
+//
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl("https://api.github.com/")
+//            .addConverterFactory(MoshiConverterFactory.create(moshi))
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .client(client)
+//            .build()
+//
+////        val service: ApiService = retrofit.create<ApiService>(ApiService::class.java)
+////        service.getInfoObjects()
+////            .subscribeOn(Schedulers.io())
+////            .subscribe({ infoObjects ->
+////                Log.d("OBJECTS", infoObjects.toString())
+////            }, { error ->
+////                Log.e("APIERROR", error.localizedMessage)
+////            })
+//
+////        Thread(Runnable {
+////            repeat(1){
+////
+////                val infoObject = InfoObject("123", "zhangsan", "xx", "xx", listOf(MyEnum.A))
+////                test(infoObject,it)
+////                test2(infoObject,it)
+////
+////                // val jsonAdapter: JsonAdapter<InfoObject> = moshi.adapter<InfoObject>(InfoObject::class.java)
+////                val toJson = "{\"email\":\"xx\",\"id\":\"123\",\"myEnums\":[\"A\"],\"name\":\"zhangsan\",\"phone\":\"xx\"}"
+////                // val toJson = GsonBuilder().create().toJson(infoObject)
+////                test3(toJson,it)
+////                test4(toJson,it)
+////                println("==================================")
+////            }
+////        }).start()
+//
 //        Thread(Runnable {
-//            repeat(1){
-//
-//                val infoObject = InfoObject("123", "zhangsan", "xx", "xx", listOf(MyEnum.A))
-//                test(infoObject,it)
-//                test2(infoObject,it)
-//
-//                // val jsonAdapter: JsonAdapter<InfoObject> = moshi.adapter<InfoObject>(InfoObject::class.java)
-//                val toJson = "{\"email\":\"xx\",\"id\":\"123\",\"myEnums\":[\"A\"],\"name\":\"zhangsan\",\"phone\":\"xx\"}"
-//                // val toJson = GsonBuilder().create().toJson(infoObject)
-//                test3(toJson,it)
-//                test4(toJson,it)
-//                println("==================================")
-//            }
+//            testGsonOrMoshi()
 //        }).start()
-
-        Thread(Runnable {
-            testGsonOrMoshi()
-        }).start()
-    }
+//    }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun testGsonOrMoshi() {
