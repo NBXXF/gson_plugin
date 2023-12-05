@@ -16,18 +16,7 @@ buildscript {
 }
 
 
-def getXXFUsername() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    def userName = properties.getProperty('publish.username')
-    return userName;
-}
-def getXXFPassword() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    def password = properties.getProperty('publish.password')
-    return password;
-}
+
 allprojects {
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
@@ -43,15 +32,15 @@ allprojects {
         }
         maven {
             credentials {
-                username getXXFUsername()
-                password getXXFPassword()
+                username '654f4d888f25556ebb4ed790'
+                password 'OsVOuR6WZFK='
             }
             url 'https://packages.aliyun.com/maven/repository/2433389-release-RMv0jP/'
         }
         maven {
             credentials {
-                username getXXFUsername()
-                password getXXFPassword()
+                username '654f4d888f25556ebb4ed790'
+                password 'OsVOuR6WZFK='
             }
             url 'https://packages.aliyun.com/maven/repository/2433389-snapshot-Kqt8ID/'
         }
