@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "gson_plugin"
+rootProject.name = "gson_plugin_share"
