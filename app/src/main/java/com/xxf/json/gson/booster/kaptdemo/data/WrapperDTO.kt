@@ -1,9 +1,12 @@
 package com.xxf.json.gson.booster.kaptdemo.data
 
+import com.xxf.json.gson.booster.annotation.JsonField
 import com.xxf.json.gson.booster.annotation.JsonModel
 
 @JsonModel
-class WrapperDTO(val child:Child= Child(1)) {
+class WrapperDTO(
+    @JsonField(attached = false)
+    val child:Child?= Child(1)) {
     @JsonModel
     class Child(val age:Int=1){
     }

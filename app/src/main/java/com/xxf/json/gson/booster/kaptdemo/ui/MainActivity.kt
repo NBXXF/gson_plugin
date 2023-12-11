@@ -2,10 +2,10 @@ package com.xxf.json.gson.booster.kaptdemo.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -14,13 +14,14 @@ import com.xxf.json.gson.booster.kaptdemo.R
 import com.xxf.json.gson.booster.kaptdemo.data.Foo
 import com.xxf.json.gson.booster.kaptdemo.data2.Parent
 import com.xxf.json.gson.booster.kaptdemo.data2.Utils
+import com.xxf.json.gson.booster.kaptdemo.ui.utils.runCosting
 import com.xxf.json.gson.plugin.AutoTypeAdapterFactory
 import java.util.concurrent.TimeUnit
 
 class MainActivity : FragmentActivity() {
 
     companion object {
-        private const val TAG = "MainActivityTest"
+        private const val TAG = "=========>gson"
     }
 
     @SuppressLint("SetTextI18n")
@@ -35,11 +36,11 @@ class MainActivity : FragmentActivity() {
                 .registerTypeAdapterFactory(AutoTypeAdapterFactory())
                 .create()
 
-            val commonTimeCost = traceOnceJson(common, json)
-            val boostTimeCost = traceOnceJson(boost, json)
+            val commonTimeCost = runCoastingWithJson(common, json)
+            val boostTimeCost = runCoastingWithJson(boost, json)
             findViewById<TextView>(R.id.result).text = """
-                common time cost: ${TimeUnit.NANOSECONDS.toMicros(commonTimeCost) / 1000.0}
-                boost time cost:  ${TimeUnit.NANOSECONDS.toMicros(boostTimeCost) / 1000.0}
+                正常情况: ${TimeUnit.NANOSECONDS.toMicros(commonTimeCost) / 1000.0}
+                使用注解生成适配器后:  ${TimeUnit.NANOSECONDS.toMicros(boostTimeCost) / 1000.0}
             """.trimIndent()
             test()
         }
@@ -54,23 +55,20 @@ class MainActivity : FragmentActivity() {
             val toJson = gson.toJsonTree(v) as JsonObject
             toJson.addProperty("age","")
             val fromJson = gson.fromJson<Parent>(toJson, Parent::class.java)
-            println("====================>xxxx:${fromJson}")
+            println("====================>int 兼容用系统的:${fromJson}")
 
         }catch (e:Throwable) {
-            println("====================>xxxx:${e}")
+            println("====================>int 兼容错误:${e}")
         }
     }
 
-    private fun traceOnceJson(gson: Gson, json: String): Long {
-        val start = SystemClock.elapsedRealtimeNanos()
-        val bean = kotlin.runCatching {
-            gson.fromJson<Foo>(json, Foo::class.java)
-        }.onFailure {
-            Log.d(TAG, Log.getStackTraceString(it))
-        }.getOrNull()
-        val end = SystemClock.elapsedRealtimeNanos()
-        Log.d(TAG, "$bean")
-        return end - start
+    private fun runCoastingWithJson(gson: Gson, json: String): Long {
+        var bean:Foo?=null
+        return runCosting {
+            bean = gson.fromJson<Foo>(json, Foo::class.java)
+        }.also {
+            Log.d(TAG, "$bean")
+        }
     }
 
     private fun json() = assets.open("test.json").bufferedReader().use { it.readText() }
