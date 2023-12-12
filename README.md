@@ -20,7 +20,8 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 11. 支持@Expose注解 来标记是否参与序列化和反序列化
 12. 支持@JsonField 精细化控制声明的字段,优先级高于@JsonModel
 13. 支持 饿汉式全部加载TypeAdapters
-14. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
+14. 支持枚举设置默认值 避免运行时异常(如果kotlin 声明为可空变量,将不影响,语言层转成java 用if判空了的)
+15. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
 
 ![](img/adapters.png)
 
@@ -57,11 +58,29 @@ annotation class JsonModel(
      * 序列化最终数据类型 默认 SerializedType.STRING
      * Gson对于枚举默认序列化成String类型
      *
-     * 受影响范围[ ENUM ]
+     * 受影响范围[ ENUM_CLASS ]
      */
     val serializedType: SerializedType = SerializedType.STRING,
-)
 
+    /**
+     * 反序列化的默认值,
+     * 如果枚举没有声明成可空类型,那么运行时将会导致bug,还有服务器可能增加枚举,那么老版本的app将会解析为null
+     * 比如
+     * @JsonModel(deserializedDefaultValue="undefined")
+     * enum class Enum1 {
+     *     @SerializedName("undefined")
+     *     UNDEFINED,
+     *     @SerializedName("x")
+     *     A,
+     *     @SerializedName("2")
+     *     B
+     * }
+     * 那么 默认值 可以是 “undefined" 或者 ”UNDEFINED"
+     *
+     * 受影响范围[ ENUM_CLASS ]
+     */
+    val deserializedDefaultValue: String = ""
+)
 
 
 /**
