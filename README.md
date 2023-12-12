@@ -19,7 +19,8 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 10. 支持字段用gson的注解声明@JsonAdapter 共存,如果有注解,优先用注解的适配器
 11. 支持@Expose注解 来标记是否参与序列化和反序列化
 12. 支持@JsonField 精细化控制声明的字段,优先级高于@JsonModel
-13. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
+13. 支持 饿汉式全部加载TypeAdapters
+14. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
 
 ![](img/adapters.png)
 
@@ -183,6 +184,10 @@ data class Foo(
 val gson = GsonBuilder()
     .registerTypeAdapterFactory(AutoTypeAdapterFactory())
     .create()
+    .apply {
+        //可选 饿汉式全部加载,有助于第一次速度,建议子线程
+        AutoTypeAdapterFactory.load(this)
+    }
 ```
 
 ### 平均10倍以上的提速 比moshi 自动生成adapter 更快
