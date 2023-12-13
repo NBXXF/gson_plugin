@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -34,8 +33,7 @@ class MainActivity : FragmentActivity() {
             val common = GsonBuilder().create()
             val boost = GsonBuilder()
                 .registerTypeAdapterFactory(AutoTypeAdapterFactory())
-                .create()
-                .apply {
+                .create().apply {
                     AutoTypeAdapterFactory.load(this)
                 }
 
@@ -49,24 +47,24 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    private fun test() {
+    private fun test(){
         try {
             val gson = Utils.create().newBuilder()
                 .registerTypeAdapterFactory(AutoTypeAdapterFactory())
                 .create()
-            val v = Parent(name = "李四")
+            val v=Parent(name = "李四")
             val toJson = gson.toJsonTree(v) as JsonObject
-            toJson.addProperty("age", "")
+            toJson.addProperty("age","")
             val fromJson = gson.fromJson<Parent>(toJson, Parent::class.java)
             println("====================>int 兼容用系统的:${fromJson}")
 
-        } catch (e: Throwable) {
+        }catch (e:Throwable) {
             println("====================>int 兼容错误:${e}")
         }
     }
 
     private fun runCoastingWithJson(gson: Gson, json: String): Long {
-        var bean: Foo? = null
+        var bean:Foo?=null
         return runCosting {
             bean = gson.fromJson<Foo>(json, Foo::class.java)
         }.also {

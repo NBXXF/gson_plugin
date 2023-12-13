@@ -7,9 +7,10 @@ import com.xxf.json.gson.booster.annotation.JsonModel
 class User(
     //@JsonAdapter(StringAllAssertNoNullAdapter::class)
     @JsonField(attached = true)
-    val name:String="",
-           @JsonField(attached = false)
-           val age:Int=1){
+    val name: String = "",
     @JsonField(attached = false)
-    var des:String="";
+    val age: Int = 1
+) {
+    @JsonField(attached = false)
+    var des: String = "";
 }

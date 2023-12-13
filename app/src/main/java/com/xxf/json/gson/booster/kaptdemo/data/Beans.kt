@@ -2,7 +2,7 @@ package com.xxf.json.gson.booster.kaptdemo.data
 
 import com.google.gson.annotations.SerializedName
 import com.xxf.json.gson.booster.annotation.JsonModel
-import com.xxf.json.gson.booster.annotation.SerializedType
+import com.xxf.json.gson.booster.enums.SerializedType
 
 @JsonModel(adapterNameSuffix = "GsonTypeAdapter", nullSafe = true)
 data class Foo(

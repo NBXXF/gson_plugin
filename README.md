@@ -21,7 +21,8 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 12. 支持@JsonField 精细化控制声明的字段,优先级高于@JsonModel
 13. 支持 饿汉式全部加载TypeAdapters
 14. 支持枚举设置默认值 避免运行时异常(如果kotlin 声明为可空变量,将不影响,语言层转成java 用if判空了的)
-15. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
+15. 支持serializeNulls注解控制是否write null
+16. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
 
 ![](img/adapters.png)
 
@@ -29,7 +30,7 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 ```kotlin
 annotation class JsonModel(
     /**
-     * 是否是空安全 默认true
+     * 控制该模型节点里面 是否是空安全 默认true
      *
      * 如,对于int类型的声明
      * 如果是val i:Int? 将不受任何影响
@@ -39,7 +40,7 @@ annotation class JsonModel(
      */
     val nullSafe: Boolean = true,
     /**
-     * 是否强类型匹配 默认false
+     * 控制该模型节点里面 是否强类型匹配 默认false
      *
      * 如,对于int类型的声明
      *如果是val i:Int? 将不受任何影响
@@ -79,7 +80,18 @@ annotation class JsonModel(
      *
      * 受影响范围[ ENUM_CLASS ]
      */
-    val deserializedDefaultValue: String = ""
+    val deserializedDefaultValue: String = "",
+
+    /**
+     * 控制该模型节点里面 是否序列化null  默认SerializeNulls.INHERIT
+     * api 于 gson.serializeNulls 或者 JsonWriter.serializeNulls
+     *
+     * 默认继承上游jsonWriter的控制(等价于gson的设置,除非中间层有拦截)
+     * 此类完成之后 会恢复继承性,不会影响其他节点！
+     *
+     * 场景:常用于后端 置空逻辑,需要前端传递其null值
+     */
+    val serializeNulls: SerializeNulls = SerializeNulls.INHERIT
 )
 
 
