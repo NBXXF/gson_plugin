@@ -1,3 +1,6 @@
+[一、介绍](#gson_plugin)
+[二、特性](#框架特性)
+
 # gson_plugin
 gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotlin特性的**、**高性能TypeAdapter**，以提升Gson的序列化与反序列化时间性能。同时也解决了kotlin默认值的问题.平均**比原始Gson快10倍**。
 ## 主要方向
