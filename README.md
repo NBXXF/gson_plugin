@@ -4,12 +4,12 @@ Table of Contents
 * [gson\_plugin](#gson_plugin)
     * [主要方向](#主要方向)
     * [框架特性](#框架特性)
-        * [注解解释](#注解解释)
-        * [仓库权限](#仓库权限)
-        * [Download](#download)
-        * [Usage](#usage)
-        * [平均10倍以上的提速 比moshi 自动生成adapter 更快](#平均10倍以上的提速-比moshi-自动生成adapter-更快)
-        * [KSP\-Support](#ksp-support)
+* [速度对比](#速度对比)
+* [注解解释](#注解解释)
+* [仓库权限](#仓库权限)
+* [KAPT\-support](#kapt-support)
+* [用法](#用法)
+* [KSP\-Support](#ksp-support)
 # gson_plugin
 gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotlin特性的**、**高性能TypeAdapter**，以提升Gson的序列化与反序列化时间性能。同时也解决了kotlin默认值的问题.平均**比原始Gson快10倍**。
 ## 主要方向
@@ -37,8 +37,12 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 16. [即将支持] 模型参数没有默认值的情况 (目前必须写默认值, 可以是?=null的形式)
 
 ![](img/adapters.png)
+# 速度对比
+平均10倍以上的提速 比moshi 自动生成adapter 更快
 
-### 注解解释
+![](img/compare.png)
+
+# 注解解释
 ```kotlin
 annotation class JsonModel(
     /**
@@ -138,7 +142,7 @@ annotation class JsonField(
     val strictType: Boolean = false
 )
 ```
-### 仓库权限
+# 仓库权限
 ```groovy
 //请在build.gradle中配置
 allprojects {
@@ -169,7 +173,7 @@ allprojects {
 }
 ```
 
-### Download
+# KAPT-support
 <details open>
   <summary>Gradle</summary>
 
@@ -214,7 +218,7 @@ kapt {
 ```
 </details>
 
-### Usage
+# 用法
 
 ```kotlin
 // 增加注解
@@ -233,11 +237,8 @@ val gson = GsonBuilder()
     }
 ```
 
-### 平均10倍以上的提速 比moshi 自动生成adapter 更快
 
-![](img/compare.png)
-
-### KSP-Support
+# KSP-Support
 [KSP(Kotlin Symbol Processing)](https://github.com/google/ksp)是Google推出的更高性能、源码级的注解处理器，gson_plugin也对KSP作了支持。
 
 <details open>
