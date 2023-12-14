@@ -38,10 +38,11 @@ gson_plugin是一个注解处理器，能够在编译期自动生成**兼容Kotl
 
 ![](img/adapters.png)
 # 速度对比
-平均10倍以上的提速 比moshi 自动生成adapter 更快
+平均比原始gson 10倍以上的提速;比moshi-code-gen 5倍提速,大家可以clone下来 运行里面的pkdemo
 
 ![](img/compare.png)
 
+![](img/pk.png)
 # 注解解释
 ```kotlin
 annotation class JsonModel(

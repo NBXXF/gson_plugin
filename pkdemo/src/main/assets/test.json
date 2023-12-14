@@ -1,0 +1,127 @@
+{
+    "foo_bar": {
+        "bar_int": 4745,
+        "bar_long": 24532,
+        "bar_string": "tht "
+    },
+    "foo_test_num": "HI",
+    "foo_boolean": true,
+    "foo_double": 3453.0,
+    "foo_int": 123,
+    "foo_list_long": [
+        233,
+        666,
+        777,
+        "999"
+    ],
+    "foo_list_bar": [
+        {
+            "bar_int": 1,
+            "bar_long": 2,
+            "bar_string": "3"
+        },
+        {
+            "bar_int": 4,
+            "bar_long": 5,
+            "bar_string": "6"
+        },
+        {
+            "bar_int": 7,
+            "bar_long": 8,
+            "bar_string": "9"
+        }
+    ],
+    "foo_list_set_long": [
+        [
+            233,
+            666,
+            777,
+            999
+        ],
+        [
+            114,
+            514,
+            123,
+            456
+        ]
+    ],
+    "foo_long": 5678,
+    "foo_list_list_long": [
+        [
+            233,
+            666,
+            777,
+            999
+        ],
+        [
+            114,
+            514,
+            123,
+            456
+        ]
+    ],
+    "foo_nullable_bean": {
+        "nullable_bar": {
+            "bar_int": 56846,
+            "bar_long": 2453462,
+            "bar_string": "thersdf ag t "
+        },
+        "nullable_boolean": true,
+        "nullable_double": 0.12,
+        "nullable_int": 2342345,
+        "nullable_list_long": [
+            980,
+            356,
+            3455
+        ],
+        "nullable_list_bar": [
+            {
+                "bar_int": 4356,
+                "bar_long": 12345,
+                "bar_string": "df er "
+            },
+            {
+                "bar_int": 5687,
+                "bar_long": 345,
+                "bar_string": "thds tertg "
+            }
+        ],
+        "nullable_long": 345635,
+        "nullable_string": "34sga"
+    },
+    "foo_set_double": [
+        114.0,
+        514.0,
+        233.0,
+        666.0
+    ],
+    "foo_set_bar": [
+        {
+            "bar_int": 10,
+            "bar_long": 11,
+            "bar_string": "12"
+        },
+        {
+            "bar_int": 13,
+            "bar_long": 14,
+            "bar_string": "15"
+        },
+        {
+            "bar_int": 16,
+            "bar_long": 17,
+            "bar_string": "18"
+        }
+    ],
+    "foo_string": "356534",
+    "var_bean": {
+        "var_int": 18,
+        "var_long": 19,
+        "val_double": 20.0,
+        "val_string": "21",
+        "var_out_constructor_list_long": [
+            22,
+            23,
+            24
+        ]
+    }
+}
